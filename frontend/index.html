@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    body { background:#111; color:#eee; font-family:sans-serif; }
+    .card { margin:10px; padding:10px; background:#222; border-radius:8px; }
+  </style>
+</head>
+<body>
+
+<div class="card">
+  <h3>CPU</h3>
+  <div id="cpu">loading...</div>
+</div>
+
+<div class="card">
+  <h3>GPU</h3>
+  <div id="gpu">loading...</div>
+</div>
+
+<div class="card">
+  <h3>RAM</h3>
+  <div id="ram">loading...</div>
+</div>
+
+<div class="card">
+  <h3>DISK</h3>
+  <div id="disk">loading...</div>
+</div>
+
+<script>
+async function update(){
+  const r = await fetch("/stats")
+  const d = await r.json()
+
+  document.getElementById("cpu").innerText = d.cpu
+  document.getElementById("gpu").innerText = d.gpu
+  document.getElementById("ram").innerText = d.ram
+  document.getElementById("disk").innerText = d.disk
+}
+
+setInterval(update, 1000)
+update()
+</script>
+
+</body>
+</html>
